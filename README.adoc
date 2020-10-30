@@ -1,0 +1,114 @@
+= Print Command Line Arg Task
+
+This project shows some of the variations in how command line args are interpreted by containers created by various frameworks.
+In the samples below you will see that the following command line args are passed in:
+```
+--foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+```
+The results should look like:
+```
+...
+ARG ==>foo=bar
+ARG ==>baz=${hello}-${world}
+ARG ==>que=\$\{hello\}-\$\{world\}
+ARG ==>qux=\$\{he.llo\}-\$\{world\}
+ARG ==>quux=${he.llo}-${world}
+...
+```
+
+
+== Application:
+A boot app that prints the command line args to the console.
+
+== Requirements:
+
+* Java 8 or Above
+
+== Classes:
+
+* PrintCommandLineApplication - the Spring Boot Main Application
+
+== Build:
+
+[source,shell,indent=2]
+----
+$ mvn clean package
+----
+
+=== Run:
+
+[source,shell,indent=2]
+----
+$ java -jar target/printcmdline-0.0.1-SNAPSHOT.jar  --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+----
+
+== Build Docker image (boot/pack) :
+
+[source,shell,indent=2]
+----
+mvn spring-boot:build-image -Dspring-boot.build-image.imageName=cppwfs/printcmdlineboot:latest
+----
+
+=== Run  Docker image (boot/pack) :
+
+[source,shell,indent=2]
+----
+docker run cppwfs/printcmdlineboot:latest --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+----
+
+=== Create and run Kubernetes Pod (boot/pack) :
+
+[source,shell,indent=2]
+----
+kubectl apply -f printcmdlineboot.yaml
+----
+
+== Build Docker image (Dockerfile) :
+
+[source,shell,indent=2]
+----
+docker build -t cppwfs/printcmdline .
+----
+
+=== Run  Docker image (Dockerfile) :
+
+[source,shell,indent=2]
+----
+docker run cppwfs/printcmdline:latest --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+----
+
+=== Create and run Kubernetes Pod (Dockerfile) :
+
+[source,shell,indent=2]
+----
+kubectl apply -f printcmdline.yaml
+----
+
+=== Create and run Pod (DockerFILE) :
+
+[source,shell,indent=2]
+----
+kubectl apply -f printcmdline.yaml
+----
+
+== Build Docker image (jib) :
+
+[source,shell,indent=2]
+----
+mvn compile jib:build
+----
+
+=== Run  Docker image (jib) :
+
+[source,shell,indent=2]
+----
+docker run cppwfs/printcmdlinejib:latest --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+----
+
+=== Create and run Kubernetes Pod (jib) :
+
+[source,shell,indent=2]
+----
+kubectl apply -f printcmdlinejib.yaml
+----
+

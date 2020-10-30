@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: printcmdlinejib
+  name: printcmdlinejib
+spec:
+  containers:
+  - args:
+    - foo=bar
+    - baz=${hello}-${world}
+    - que=\$\{hello\}-\$\{world\}
+    - qux=\$\{he.llo\}-\$\{world\}
+    - quux=${he.llo}-${world}
+    image: cppwfs/printcmdlinejib:latest
+    imagePullPolicy: IfNotPresent
+    name: printcmdlinejib
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

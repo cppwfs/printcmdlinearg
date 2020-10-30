@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: printcmdlineboot
+  name: printcmdlineboot
+spec:
+  containers:
+  - args:
+    - foo=bar
+    - baz=${hello}-${world}
+    - que=\$\{hello\}-\$\{world\}
+    - qux=\$\{he.llo\}-\$\{world\}
+    - quux=${he.llo}-${world}
+    image: cppwfs/printcmdlineboot:latest
+    imagePullPolicy: IfNotPresent
+    name: printcmdlineboot
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
