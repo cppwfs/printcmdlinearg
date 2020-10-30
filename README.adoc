@@ -32,14 +32,14 @@ A boot app that prints the command line args to the console.
 
 [source,shell,indent=2]
 ----
-$ mvn clean package
+mvn clean package
 ----
 
 === Run:
 
 [source,shell,indent=2]
 ----
-$ java -jar target/printcmdline-0.0.1-SNAPSHOT.jar  --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
+java -jar target/printcmdline-0.0.1-SNAPSHOT.jar  --foo=bar baz=${hello}-${world} que=\$\{hello\}-\$\{world\} qux=\$\{he.llo\}-\$\{world\} quux='${he.llo}-${world}'
 ----
 
 == Build Docker image (boot/pack) :
