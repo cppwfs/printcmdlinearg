@@ -112,3 +112,14 @@ docker run cppwfs/printcmdlinejib:latest --foo=bar baz=${hello}-${world} que=\$\
 kubectl apply -f printcmdlinejib.yaml
 ----
 
+
+== Build Docker Image (vmware-tanzu / buildkit-cli-for-kubectl) 
+Installation instructions can be found here: https://github.com/vmware-tanzu/buildkit-cli-for-kubectl
+----
+kubectl build -t tanzu/print:1.0.0 -f Dockerfile ./
+----
+
+=== Run Kubernetes Pod (vmware-tanzu / buildkit-cli-for-kubectl) :
+----
+docker run tanzu/print:1.0.0 --foo=bar boo=bug
+----
